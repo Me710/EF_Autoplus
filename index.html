@@ -134,31 +134,19 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
-                <a href="#" class="flex items-center">
-                    <div class="flex items-center">
-                        <span class="logo-ef">EF</span>
-                        <span class="logo-auto">
-                            AUT
-                            <span class="o-wheel">
-                                <span class="wheel-circle"></span>
-                                <span class="wheel-spoke" style="transform: translate(-50%, -50%) rotate(0deg);"></span>
-                                <span class="wheel-spoke"
-                                    style="transform: translate(-50%, -50%) rotate(72deg);"></span>
-                                <span class="wheel-spoke"
-                                    style="transform: translate(-50%, -50%) rotate(144deg);"></span>
-                                <span class="wheel-spoke"
-                                    style="transform: translate(-50%, -50%) rotate(216deg);"></span>
-                                <span class="wheel-spoke"
-                                    style="transform: translate(-50%, -50%) rotate(288deg);"></span>
-                            </span>
-                        </span>
-                        <span class="logo-plus">+</span>
-                    </div>
-                    <div class="ml-2 border-l border-gray-600 pl-2">
-                        <div class="slogan">ACHAT · VENTE · ÉCHANGE</div>
+                <a href="#" class="flex flex-col items-start md:flex-row md:items-center">
+                    <!-- Image du logo -->
+                    <img src="images/ef_autoplus_logo.jpg" alt="EF AUTO+" class="h-24 md:h-28">
+
+                    <!-- Slogan -->
+                    <div
+                        class="ml-0 md:ml-4 mt-2 md:mt-0 border-t md:border-t-0 md:border-l border-gray-600 pt-2 md:pt-0 md:pl-4">
+                        <div class="slogan text-sm tracking-widest text-gray-300 uppercase">ACHAT · VENTE · ÉCHANGE
+                        </div>
                     </div>
                 </a>
             </div>
+
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex space-x-8">
@@ -193,30 +181,19 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section min-h-screen flex items-center justify-center text-center px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="mb-8 flex justify-center">
-                <div class="flex items-center">
-                    <span class="logo-ef text-4xl md:text-6xl">EF</span>
-                    <span class="logo-auto text-4xl md:text-6xl">
-                        AUT
-                        <span class="o-wheel">
-                            <span class="wheel-circle wheel-spin"></span>
-                            <span class="wheel-spoke"
-                                style="transform: translate(-50%, -50%) rotate(0deg); height: 1.4rem;"></span>
-                            <span class="wheel-spoke"
-                                style="transform: translate(-50%, -50%) rotate(72deg); height: 1.4rem;"></span>
-                            <span class="wheel-spoke"
-                                style="transform: translate(-50%, -50%) rotate(144deg); height: 1.4rem;"></span>
-                            <span class="wheel-spoke"
-                                style="transform: translate(-50%, -50%) rotate(216deg); height: 1.4rem;"></span>
-                            <span class="wheel-spoke"
-                                style="transform: translate(-50%, -50%) rotate(288deg); height: 1.4rem;"></span>
-                        </span>
-                    </span>
-                    <span class="logo-plus text-4xl md:text-6xl">+</span>
-                </div>
-            </div>
+    <section id="home"
+        class="hero-section relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+        <!-- Image de fond -->
+        <div class="absolute inset-0 z-0" id="hero-bg">
+            <img src="images/hero_3.png" alt="EF AUTO+ Hero"
+                class="w-full h-full object-cover transition-transform duration-1000 ease-out scale-105">
+        </div>
+
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
+
+        <!-- Contenu -->
+        <div class="relative z-20 px-6 max-w-4xl mx-auto text-white">
             <h1 class="text-3xl md:text-5xl font-bold mb-6">VOTRE EXPERT AUTOMOBILE À QUÉBEC</h1>
             <p class="text-xl md:text-2xl mb-12 max-w-2xl mx-auto">Service personnalisé pour l'achat, la vente et
                 l'échange de véhicules de qualité</p>
@@ -232,6 +209,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- Vehicles Section -->
     <section id="vehicles" class="py-20 px-6 max-w-7xl mx-auto">
@@ -649,25 +627,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-8">
                 <!-- Logo and Slogan -->
                 <div>
-                    <div class="flex items-center mb-4">
-                        <span class="logo-ef">EF</span>
-                        <span class="logo-auto">
-                            AUT
-                            <span class="o-wheel">
-                                <span class="wheel-circle"></span>
-                                <span class="wheel-spoke" style="transform: translate(-50%, -50%) rotate(0deg);"></span>
-                                <span class="wheel-spoke"
-                                    style="transform: translate(-50%, -50%) rotate(72deg);"></span>
-                                <span class="wheel-spoke"
-                                    style="transform: translate(-50%, -50%) rotate(144deg);"></span>
-                                <span class="wheel-spoke"
-                                    style="transform: translate(-50%, -50%) rotate(216deg);"></span>
-                                <span class="wheel-spoke"
-                                    style="transform: translate(-50%, -50%) rotate(288deg);"></span>
-                            </span>
-                        </span>
-                        <span class="logo-plus">+</span>
-                    </div>
+                    <img src="images/ef_autoplus_logo.jpg" alt="EF AUTO+" class="h-24 md:h-28">
                     <div class="slogan mb-6">ACHAT · VENTE · ÉCHANGE</div>
                     <p class="text-gray-400 mb-6">Votre concessionnaire automobile de confiance à Québec depuis 2013.
                     </p>
@@ -737,7 +697,7 @@
             </div>
 
             <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 EF AUTO+. Tous droits réservés.</p>
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 EF AUTO+. Tous droits réservés.</p>
                 <div class="flex space-x-6">
                     <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Politique de
                         confidentialité</a>

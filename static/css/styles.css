@@ -1,0 +1,114 @@
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.wheel-spin {
+    animation: spin 4s linear infinite;
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.03);
+}
+
+.btn-gradient {
+    background: linear-gradient(to right, #C8102E, #a00d26);
+}
+
+.btn-gradient:hover {
+    background: linear-gradient(to right, #a00d26, #800a1f);
+}
+
+.logo-ef {
+    color: #E6E1D3;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.logo-auto {
+    color: #C8102E;
+    font-weight: bold;
+    font-size: 2rem;
+    position: relative;
+}
+
+.logo-plus {
+    color: #E6E1D3;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.o-wheel {
+    position: relative;
+    display: inline-block;
+}
+
+.wheel-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 2px solid #C8102E;
+    border-radius: 50%;
+}
+
+.wheel-spoke {
+    position: absolute;
+    background-color: #C8102E;
+    width: 2px;
+    height: 0.9rem;
+    top: 50%;
+    left: 50%;
+    transform-origin: top center;
+}
+
+.slogan {
+    color: #E6E1D3;
+    letter-spacing: 0.2em;
+    font-size: 0.8rem;
+}
+
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1494972308805-46337c850467?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.car-card:hover .car-img {
+    transform: scale(1.05);
+}
+
+.filter-btn.active {
+    background-color: #C8102E;
+    color: white;
+}
+
+.file-upload {
+    display: none;
+}
+
+.file-upload-label {
+    display: inline-block;
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 1px dashed #E6E1D3;
+    border-radius: 4px;
+    color: #E6E1D3;
+    transition: all 0.3s;
+}
+
+.file-upload-label:hover {
+    background-color: rgba(198, 16, 46, 0.2);
+    border-color: #C8102E;
+}

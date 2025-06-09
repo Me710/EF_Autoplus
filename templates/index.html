@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EF AUTO+ | Achat · Vente · Échange de véhicules à Québec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body class="bg-black text-gray-200 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-black py-4 px-6 border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="flex flex-col items-start md:flex-row md:items-center">
+                    <img src="{{ url_for('static', filename='images/ef_autoplus_logo.jpg') }}" alt="EF AUTO+"
+                        class="h-24 md:h-28">
+                    <div
+                        class="ml-0 md:ml-4 mt-2 md:mt-0 border-t md:border-t-0 md:border-l border-gray-600 pt-2 md:pt-0 md:pl-4">
+                        <div class="slogan text-sm tracking-widest text-gray-300 uppercase">ACHAT · VENTE · ÉCHANGE
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-300 hover:text-red-600 transition duration-300">Accueil</a>
+                <a href="#vehicles" class="text-gray-300 hover:text-red-600 transition duration-300">Nos véhicules</a>
+                <a href="#exchange" class="text-gray-300 hover:text-red-600 transition duration-300">Échanger</a>
+                <a href="#about" class="text-gray-300 hover:text-red-600 transition duration-300">À propos</a>
+                <a href="#contact" class="text-gray-300 hover:text-red-600 transition duration-300">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-300 hover:text-red-600 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden py-4 px-6">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="text-gray-300 hover:text-red-600">Accueil</a>
+                <a href="#vehicles" class="text-gray-300 hover:text-red-600">Nos véhicules</a>
+                <a href="#exchange" class="text-gray-300 hover:text-red-600">Échanger</a>
+                <a href="#about" class="text-gray-300 hover:text-red-600">À propos</a>
+                <a href="#contact" class="text-gray-300 hover:text-red-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="bg-green-500 text-white p-4 mb-4">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- Hero Section -->
+    <section id="home"
+        class="hero-section relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+        <div class="absolute inset-0 z-0" id="hero-bg">
+            <img src="{{ url_for('static', filename='images/hero_3.png') }}" alt="EF AUTO+ Hero"
+                class="w-full h-full object-cover transition-transform duration-1000 ease-out scale-105">
+        </div>
+        <div class="absolute inset-0 bg-black bg-opacity-70 z-10"></div>
+        <div class="relative z-20 px-6 max-w-4xl mx-auto text-white">
+            <h1 class="text-3xl md:text-5xl font-bold mb-6">VOTRE EXPERT AUTOMOBILE À QUÉBEC</h1>
+            <p class="text-xl md:text-2xl mb-12 max-w-2xl mx-auto">Service personnalisé pour l'achat, la vente et
+                l'échange de véhicules de qualité</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#vehicles"
+                    class="btn-gradient hover:bg-red-800 text-white font-bold py-3 px-8 rounded transition duration-300 hover-scale">
+                    Voir nos véhicules
+                </a>
+                <a href="#exchange"
+                    class="bg-transparent hover:bg-gray-800 text-white font-bold py-3 px-8 border border-white rounded transition duration-300 hover-scale">
+                    Échanger mon véhicule
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicles Section -->
+    <section id="vehicles" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">NOS VÉHICULES DISPONIBLES</h2>
+            <div class="w-24 h-1 bg-red-600 mx-auto mb-4"></div>
+            <p class="max-w-2xl mx-auto">Découvrez notre sélection de véhicules soigneusement inspectés et entretenus
+            </p>
+        </div>
+
+        <!-- Filters -->
+        <div class="mb-12 flex flex-wrap justify-center gap-4">
+            <button class="filter-btn active px-4 py-2 border border-gray-600 rounded-full transition"
+                data-filter="all">Tous</button>
+            <button class="filter-btn px-4 py-2 border border-gray-600 rounded-full transition"
+                data-filter="sedan">Berlines</button>
+            <button class="filter-btn px-4 py-2 border border-gray-600 rounded-full transition"
+                data-filter="suv">SUV</button>
+            <button class="filter-btn px-4 py-2 border border-gray-600 rounded-full transition"
+                data-filter="truck">Camions</button>
+            <button class="filter-btn px-4 py-2 border border-gray-600 rounded-full transition"
+                data-filter="luxury">Luxe</button>
+        </div>
+
+        <!-- Vehicle Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="vehicle-grid">
+            <!-- Vehicle cards will be dynamically inserted here -->
+        </div>
+
+        <!-- View More Button -->
+        <div class="text-center mt-12">
+            <button
+                class="btn-gradient hover:bg-red-800 text-white font-bold py-3 px-8 rounded transition duration-300 hover-scale">
+                Voir plus de véhicules
+            </button>
+        </div>
+    </section>
+
+    <!-- Exchange Section -->
+    <section id="exchange" class="py-20 px-6 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">ÉCHANGEZ VOTRE VÉHICULE</h2>
+                <div class="w-24 h-1 bg-red-600 mx-auto mb-4"></div>
+                <p class="max-w-2xl mx-auto">Obtenez une estimation gratuite et sans engagement pour votre véhicule</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Form Column -->
+                <div class="bg-black p-8 rounded-lg shadow-xl hover-scale">
+                    <form action="{{ url_for('submit_exchange') }}" method="POST" enctype="multipart/form-data">
+                        <div class="mb-6">
+                            <label class="block text-gray-300 mb-2" for="name">Nom complet</label>
+                            <input
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                type="text" id="name" name="name" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-300 mb-2" for="email">Email</label>
+                            <input
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                type="email" id="email" name="email" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-300 mb-2" for="phone">Téléphone</label>
+                            <input
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-300 mb-2" for="vehicle">Véhicule à échanger</label>
+                            <input
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                type="text" id="vehicle" name="vehicle" placeholder="Marque, modèle, année" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-300 mb-2" for="photo">Photo du véhicule</label>
+                            <input type="file" id="photo" name="photo" accept="image/*">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-300 mb-2" for="message">Informations supplémentaires</label>
+                            <textarea
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                id="message" name="message" rows="4"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="btn-gradient hover:bg-red-800 text-white font-bold py-3 px-8 rounded transition duration-300 w-full">
+                            Envoyer la demande
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Benefits Column -->
+                <div class="flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-6">POURQUOI ÉCHANGER AVEC EF AUTO+ ?</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-red-600 p-2 rounded-full mr-4 flex-shrink-0">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Évaluation juste et transparente</h4>
+                                <p class="text-gray-400">Nos experts évaluent votre véhicule selon les standards du
+                                    marché.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-red-600 p-2 rounded-full mr-4 flex-shrink-0">
+                                <i class="fas fa-sync-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Processus simplifié</h4>
+                                <p class="text-gray-400">Nous nous occupons de toute la paperasse pour un échange sans
+                                    tracas.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-red-600 p-2 rounded-full mr-4 flex-shrink-0">
+                                <i class="fas fa-car text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Large choix de véhicules</h4>
+                                <p class="text-gray-400">Trouvez le véhicule parfait parmi notre inventaire varié.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-red-600 p-2 rounded-full mr-4 flex-shrink-0">
+                                <i class="fas fa-hand-holding-usd text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Financement disponible</h4>
+                                <p class="text-gray-400">Solutions de financement adaptées à vos besoins.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Text Content -->
+            <div>
+                <h2 class="text-4xl font-bold mb-6">QUI SOMMES-NOUS ?</h2>
+                <div class="w-24 h-1 bg-red-600 mb-6"></div>
+                <p class="mb-6">Depuis 10 ans, EF AUTO+ se distingue à Québec comme une référence en matière d'achat, de
+                    vente et d'échange de véhicules de qualité.</p>
+                <p class="mb-6">Notre équipe de passionnés automobiles met tout en œuvre pour vous offrir une expérience
+                    transparente, honnête et personnalisée.</p>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-4">NOS ENGAGEMENTS</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <span class="bg-red-600 w-2 h-2 rounded-full mr-3"></span>
+                            <span>Véhicules rigoureusement inspectés avant mise en vente</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="bg-red-600 w-2 h-2 rounded-full mr-3"></span>
+                            <span>Transparence totale sur l'histoire des véhicules</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="bg-red-600 w-2 h-2 rounded-full mr-3"></span>
+                            <span>Service personnalisé adapté à vos besoins</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="bg-red-600 w-2 h-2 rounded-full mr-3"></span>
+                            <span>Politique de prix compétitifs et justes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="bg-red-600 w-2 h-2 rounded-full mr-3"></span>
+                            <span>Suivi après-vente exemplaire</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <button
+                    class="btn-gradient hover:bg-red-800 text-white font-bold py-3 px-8 rounded transition duration-300">
+                    Découvrir notre équipe
+                </button>
+            </div>
+
+            <!-- Image -->
+            <div class="relative group">
+                <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                    alt="Notre concession" class="rounded-lg w-full hover-scale">
+                <div
+                    class="absolute -bottom-5 -right-5 bg-red-600 w-24 h-24 rounded-lg group-hover:rotate-45 transition-transform duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 px-6 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">TEMOIGNAGES DE CLIENTS</h2>
+                <div class="w-24 h-1 bg-red-600 mx-auto mb-4"></div>
+                <p class="max-w-2xl mx-auto">Ce que nos clients disent de leur expérience avec EF AUTO+</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-black p-8 rounded-lg hover-scale">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="mb-6 italic">"J'ai échangé mon ancien véhicule chez EF AUTO+ et j'ai été impressionné par
+                        leur professionnalisme. L'évaluation était juste et le processus très simple."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client"
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Marc Tremblay</h4>
+                            <p class="text-sm text-gray-400">Québec</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-black p-8 rounded-lg hover-scale">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="mb-6 italic">"Service exceptionnel! L'équipe m'a aidé à trouver exactement ce que je
+                        cherchais dans mon budget. Aucune pression, seulement de bons conseils."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client"
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Sophie Gagnon</h4>
+                            <p class="text-sm text-gray-400">Lévis</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-black p-8 rounded-lg hover-scale">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="mb-6 italic">"Excellent service après-vente. J'ai eu une petite question 3 mois après mon
+                        achat et ils ont été très réactifs pour m'aider. Je recommande!"</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client"
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Patrick Roy</h4>
+                            <p class="text-sm text-gray-400">Beauport</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">NOUS CONTACTER</h2>
+            <div class="w-24 h-1 bg-red-600 mx-auto mb-4"></div>
+            <p class="max-w-2xl mx-auto">Besoin d'informations ou d'assistance ? Notre équipe est là pour vous aider</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact Info -->
+            <div class="bg-black p-8 rounded-lg hover-scale">
+                <h3 class="text-2xl font-bold mb-6">COORDONNÉES</h3>
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="bg-red-600 p-3 rounded-full mr-4 flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Adresse</h4>
+                            <p class="text-gray-400">1234 Rue de l'Auto, Québec, QC G1V 2L9</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-red-600 p-3 rounded-full mr-4 flex-shrink-0">
+                            <i class="fas fa-phone-alt text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Téléphone</h4>
+                            <p class="text-gray-400">(418) 555-1234</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-red-600 p-3 rounded-full mr-4 flex-shrink-0">
+                            <i class="fas fa-envelope text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Email</h4>
+                            <p class="text-gray-400">contact@efautoplus.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-red-600 p-3 rounded-full mr-4 flex-shrink-0">
+                            <i class="fas fa-clock text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Heures d'ouverture</h4>
+                            <p class="text-gray-400">
+                                Lundi-Vendredi: 9h00-18h00<br>
+                                Samedi: 9h00-17h00<br>
+                                Dimanche: Fermé
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <h4 class="font-bold mb-4">NOUS SUIVRE</h4>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="bg-black p-8 rounded-lg hover-scale">
+                <h3 class="text-2xl font-bold mb-6">ENVOYEZ-NOUS UN MESSAGE</h3>
+                <form action="{{ url_for('submit_contact') }}" method="POST">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-300 mb-2" for="contact-name">Nom</label>
+                            <input
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                type="text" id="contact-name" name="contact-name" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-300 mb-2" for="contact-email">Email</label>
+                            <input
+                                class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                                type="email" id="contact-email" name="contact-email" required>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-300 mb-2" for="contact-subject">Sujet</label>
+                        <input
+                            class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                            type="text" id="contact-subject" name="contact-subject" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-300 mb-2" for="contact-message">Message</label>
+                        <textarea
+                            class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                            id="contact-message" name="contact-message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit"
+                        class="btn-gradient hover:bg-red-800 text-white font-bold py-3 px-8 rounded transition duration-300 w-full">
+                        Envoyer le message
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div class="mt-16 rounded-lg overflow-hidden">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2726.6672545904235!2d-71.27336668444512!3d46.80255587913997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb9ab8b5d8f9b0f%3A0x6a3a6e7b31520b84!2sQu%C3%A9bec%20City%2C%20QC!5e0!3m2!1sen!2sca!4v1623932090152!5m2!1sen!2sca"
+                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                class="rounded-lg"></iframe>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 px-6 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-8">
+                <!-- Logo and Slogan -->
+                <div>
+                    <img src="{{ url_for('static', filename='images/ef_autoplus_logo.jpg') }}" alt="EF AUTO+"
+                        class="h-24 md:h-28">
+                    <div class="slogan mb-6">ACHAT · VENTE · ÉCHANGE</div>
+                    <p class="text-gray-400 mb-6">Votre concessionnaire automobile de confiance à Québec depuis 2013.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-red-600 transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-red-600 transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-red-600 transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-red-600 transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">LIENS RAPIDES</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Accueil</a>
+                        </li>
+                        <li><a href="#vehicles" class="text-gray-400 hover:text-white transition duration-300">Nos
+                                véhicules</a></li>
+                        <li><a href="#exchange"
+                                class="text-gray-400 hover:text-white transition duration-300">Échanger</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300">À propos</a>
+                        </li>
+                        <li><a href="#contact"
+                                class="text-gray-400 hover:text-white transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">SERVICES</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Achat de
+                                véhicules</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Vente de
+                                véhicules</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Échange de
+                                véhicules</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Financement</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Service
+                                après-vente</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">NEWSLETTER</h4>
+                    <p class="text-gray-400 mb-4">Abonnez-vous pour recevoir nos offres et promotions</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email"
+                            class="px-4 py-3 bg-gray-800 text-white rounded-l focus:outline-none w-full" required>
+                        <button type="submit"
+                            class="bg-red-600 hover:bg-red-700 px-4 py-3 rounded-r transition duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 EF AUTO+. Tous droits réservés.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Politique de
+                        confidentialité</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Conditions
+                        d'utilisation</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition duration-300">Mentions
+                        légales</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

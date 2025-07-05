@@ -1,0 +1,114 @@
+{% extends "admin/base.html" %}
+
+{% block title %}EF AUTO+ | Répondre à la demande d'échange{% endblock %}
+{% block page_title %}Répondre à la demande d'échange{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Répondre à la demande d'échange</h2>
+            <a href="{{ url_for('admin_exchanges') }}" class="text-gray-400 hover:text-white">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Retour aux demandes
+            </a>
+        </div>
+
+        <!-- Détails de la demande -->
+        <div class="bg-gray-700 rounded-lg p-6 mb-6">
+            <h3 class="text-lg font-bold mb-4">Détails de la demande</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Client</label>
+                    <p class="text-white font-semibold">{{ exchange.name }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Email</label>
+                    <p class="text-white">{{ exchange.email }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Téléphone</label>
+                    <p class="text-white">{{ exchange.phone }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Véhicule à échanger</label>
+                    <p class="text-white">{{ exchange.vehicle }}</p>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-300">Message du client</label>
+                    <p class="text-white whitespace-pre-wrap">{{ exchange.message or 'Aucun message' }}</p>
+                </div>
+                {% if exchange.photo_path %}
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-300">Photo du véhicule</label>
+                    <img src="{{ url_for('static', filename=exchange.photo_path) }}" alt="Photo du véhicule"
+                        class="w-64 h-48 object-cover rounded-lg mt-2">
+                </div>
+                {% endif %}
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Date de la demande</label>
+                    <p class="text-white">{{ exchange.created_at.strftime('%d/%m/%Y à %H:%M') }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Statut actuel</label>
+                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full
+                               {% if exchange.status == 'En attente' %}bg-yellow-100 text-yellow-800
+                               {% elif exchange.status == 'En cours' %}bg-blue-100 text-blue-800
+                               {% elif exchange.status == 'Terminé' %}bg-green-100 text-green-800
+                               {% elif exchange.status == 'Annulé' %}bg-red-100 text-red-800
+                               {% else %}bg-gray-100 text-gray-800{% endif %}">
+                        {{ exchange.status }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Réponses précédentes -->
+        {% if exchange.responses %}
+        <div class="bg-gray-700 rounded-lg p-6 mb-6">
+            <h3 class="text-lg font-bold mb-4">Réponses précédentes</h3>
+            {% for response in exchange.responses %}
+            <div class="border-l-4 border-red-600 pl-4 mb-4">
+                <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                        <p class="text-white whitespace-pre-wrap">{{ response.admin_message }}</p>
+                    </div>
+                    <span class="text-sm text-gray-400 ml-4">
+                        {{ response.response_date.strftime('%d/%m/%Y %H:%M') }}
+                    </span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Formulaire de réponse -->
+        <form method="POST" class="space-y-6">
+            <div>
+                <label for="admin_message" class="block text-sm font-medium text-gray-300 mb-2">
+                    Votre réponse *
+                </label>
+                <textarea id="admin_message" name="admin_message" rows="6" required
+                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white"
+                    placeholder="Tapez votre réponse au client..."></textarea>
+                <p class="text-sm text-gray-400 mt-1">
+                    Cette réponse sera enregistrée et le statut sera automatiquement mis à jour.
+                </p>
+            </div>
+
+            <!-- Boutons -->
+            <div class="flex justify-end space-x-4">
+                <a href="{{ url_for('admin_exchanges') }}"
+                    class="px-6 py-3 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition duration-200">
+                    Annuler
+                </a>
+                <button type="submit"
+                    class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition duration-200">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    Envoyer la réponse
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

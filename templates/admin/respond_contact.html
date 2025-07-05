@@ -1,0 +1,102 @@
+{% extends "admin/base.html" %}
+
+{% block title %}EF AUTO+ | Répondre au message{% endblock %}
+{% block page_title %}Répondre au message{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Répondre au message</h2>
+            <a href="{{ url_for('admin_contacts') }}" class="text-gray-400 hover:text-white">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Retour aux messages
+            </a>
+        </div>
+
+        <!-- Détails du message -->
+        <div class="bg-gray-700 rounded-lg p-6 mb-6">
+            <h3 class="text-lg font-bold mb-4">Détails du message</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Expéditeur</label>
+                    <p class="text-white font-semibold">{{ contact.name }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Email</label>
+                    <p class="text-white">{{ contact.email }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Sujet</label>
+                    <p class="text-white">{{ contact.subject }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Date du message</label>
+                    <p class="text-white">{{ contact.created_at.strftime('%d/%m/%Y à %H:%M') }}</p>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-300">Message</label>
+                    <p class="text-white whitespace-pre-wrap">{{ contact.message }}</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300">Statut actuel</label>
+                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full
+                               {% if contact.status == 'Non lu' %}bg-red-100 text-red-800
+                               {% elif contact.status == 'En cours' %}bg-yellow-100 text-yellow-800
+                               {% elif contact.status == 'Répondu' %}bg-green-100 text-green-800
+                               {% else %}bg-gray-100 text-gray-800{% endif %}">
+                        {{ contact.status }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Réponses précédentes -->
+        {% if contact.responses %}
+        <div class="bg-gray-700 rounded-lg p-6 mb-6">
+            <h3 class="text-lg font-bold mb-4">Réponses précédentes</h3>
+            {% for response in contact.responses %}
+            <div class="border-l-4 border-red-600 pl-4 mb-4">
+                <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                        <p class="text-white whitespace-pre-wrap">{{ response.admin_message }}</p>
+                    </div>
+                    <span class="text-sm text-gray-400 ml-4">
+                        {{ response.response_date.strftime('%d/%m/%Y %H:%M') }}
+                    </span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Formulaire de réponse -->
+        <form method="POST" class="space-y-6">
+            <div>
+                <label for="admin_message" class="block text-sm font-medium text-gray-300 mb-2">
+                    Votre réponse *
+                </label>
+                <textarea id="admin_message" name="admin_message" rows="6" required
+                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white"
+                    placeholder="Tapez votre réponse au client..."></textarea>
+                <p class="text-sm text-gray-400 mt-1">
+                    Cette réponse sera enregistrée et le statut sera automatiquement mis à jour.
+                </p>
+            </div>
+
+            <!-- Boutons -->
+            <div class="flex justify-end space-x-4">
+                <a href="{{ url_for('admin_contacts') }}"
+                    class="px-6 py-3 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition duration-200">
+                    Annuler
+                </a>
+                <button type="submit"
+                    class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition duration-200">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    Envoyer la réponse
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

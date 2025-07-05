@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Images - EF AUTO+</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Test d'affichage des images</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for vehicle in vehicles %}
+            <div class="bg-gray-800 rounded-lg p-4">
+                <h3 class="text-lg font-bold mb-2">{{ vehicle.name }}</h3>
+                <p class="text-gray-400 mb-2">URL: {{ vehicle.image_url }}</p>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold mb-2">Affichage avec url_for:</h4>
+                    {% if vehicle.image_url.startswith('http') %}
+                    <img src="{{ vehicle.image_url }}" alt="{{ vehicle.name }}"
+                        class="w-full h-48 object-cover rounded">
+                    <p class="text-green-400 text-sm mt-1">Image externe (URL directe)</p>
+                    {% else %}
+                    <img src="{{ url_for('static', filename=vehicle.image_url) }}" alt="{{ vehicle.name }}"
+                        class="w-full h-48 object-cover rounded">
+                    <p class="text-blue-400 text-sm mt-1">Image uploadée (url_for)</p>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="font-semibold mb-2">Affichage direct:</h4>
+                    <img src="{{ vehicle.image_url }}" alt="{{ vehicle.name }}"
+                        class="w-full h-48 object-cover rounded">
+                    <p class="text-yellow-400 text-sm mt-1">Affichage direct (peut ne pas fonctionner pour les uploads)
+                    </p>
+                </div>
+
+                <div class="text-sm text-gray-400">
+                    <p>Type: {{ vehicle.type }}</p>
+                    <p>Prix: {{ vehicle.price }}</p>
+                    <p>Disponible: {{ "Oui" if vehicle.is_available else "Non" }}</p>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-span-full text-center py-12">
+                <p class="text-gray-400 text-lg">Aucun véhicule trouvé</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="{{ url_for('home') }}" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg">
+                Retour à l'accueil
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

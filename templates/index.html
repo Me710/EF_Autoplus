@@ -120,7 +120,44 @@
 
         <!-- Vehicle Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="vehicle-grid">
-            <!-- Vehicle cards will be dynamically inserted here -->
+            {% for vehicle in vehicles %}
+            <div class="car-card bg-gray-900 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+                <div class="relative overflow-hidden h-48">
+                    {% if vehicle.image_url.startswith('http') %}
+                    <img src="{{ vehicle.image_url }}" alt="{{ vehicle.name }}"
+                        class="car-img w-full h-full object-cover transition-transform duration-500">
+                    {% else %}
+                    <img src="{{ url_for('static', filename=vehicle.image_url) }}" alt="{{ vehicle.name }}"
+                        class="car-img w-full h-full object-cover transition-transform duration-500">
+                    {% endif %}
+                    <div class="absolute bottom-0 left-0 bg-red-600 text-white px-4 py-1 text-sm">{{ vehicle.price }}
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">{{ vehicle.name }}</h3>
+                    {% if vehicle.description %}
+                    <p class="text-gray-400 text-sm mb-3">{{ vehicle.description[:100] }}{% if
+                        vehicle.description|length > 100 %}...{% endif %}</p>
+                    {% endif %}
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-400 text-sm uppercase">
+                            {% if vehicle.type == 'luxury' %}Luxe
+                            {% elif vehicle.type == 'truck' %}Camion
+                            {% elif vehicle.type == 'suv' %}SUV
+                            {% else %}Berline{% endif %}
+                        </span>
+                        <a href="{{ url_for('vehicle_details', id=vehicle.id) }}"
+                            class="btn-gradient hover:bg-red-800 text-white font-bold py-2 px-4 rounded transition duration-300 text-sm inline-block">
+                            Voir détails
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-span-full text-center py-12">
+                <p class="text-gray-400 text-lg">Aucun véhicule disponible pour le moment.</p>
+            </div>
+            {% endfor %}
         </div>
 
         <!-- View More Button -->

@@ -1,0 +1,108 @@
+{% extends "admin/base.html" %}
+
+{% block title %}EF AUTO+ | Gestion des véhicules{% endblock %}
+{% block page_title %}Gestion des véhicules{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header avec bouton d'ajout -->
+    <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-bold">Véhicules ({{ vehicles|length }})</h2>
+        <a href="{{ url_for('admin_add_vehicle') }}"
+            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition duration-200">
+            <i class="fas fa-plus mr-2"></i>
+            Ajouter un véhicule
+        </a>
+    </div>
+
+    <!-- Tableau des véhicules -->
+    <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-gray-700">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Image
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Nom
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Type
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Prix
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                            Statut</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Date
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                            Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-700">
+                    {% for vehicle in vehicles %}
+                    <tr class="hover:bg-gray-700">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            {% if vehicle.image_url.startswith('http') %}
+                            <img src="{{ vehicle.image_url }}" alt="{{ vehicle.name }}"
+                                class="h-12 w-16 object-cover rounded">
+                            {% else %}
+                            <img src="{{ url_for('static', filename=vehicle.image_url) }}" alt="{{ vehicle.name }}"
+                                class="h-12 w-16 object-cover rounded">
+                            {% endif %}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div>
+                                <div class="text-sm font-medium text-white">{{ vehicle.name }}</div>
+                                {% if vehicle.year %}
+                                <div class="text-sm text-gray-400">{{ vehicle.year }}</div>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full
+                                       {% if vehicle.type == 'luxury' %}bg-purple-100 text-purple-800
+                                       {% elif vehicle.type == 'suv' %}bg-blue-100 text-blue-800
+                                       {% elif vehicle.type == 'truck' %}bg-orange-100 text-orange-800
+                                       {% else %}bg-gray-100 text-gray-800{% endif %}">
+                                {{ vehicle.type|title }}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
+                            {{ vehicle.price }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span
+                                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full
+                                       {% if vehicle.is_available %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+                                {% if vehicle.is_available %}Disponible{% else %}Indisponible{% endif %}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                            {{ vehicle.created_at.strftime('%d/%m/%Y') }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div class="flex space-x-2">
+                                <a href="{{ url_for('admin_edit_vehicle', id=vehicle.id) }}"
+                                    class="text-blue-400 hover:text-blue-300">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ url_for('admin_delete_vehicle', id=vehicle.id) }}"
+                                    class="text-red-400 hover:text-red-300"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce véhicule ?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="px-6 py-4 text-center text-gray-400">
+                            Aucun véhicule trouvé
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

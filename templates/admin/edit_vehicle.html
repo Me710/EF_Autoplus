@@ -1,0 +1,157 @@
+{% extends "admin/base.html" %}
+
+{% block title %}EF AUTO+ | Modifier le véhicule{% endblock %}
+{% block page_title %}Modifier le véhicule{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Modifier le véhicule</h2>
+            <a href="{{ url_for('admin_vehicles') }}" class="text-gray-400 hover:text-white">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Retour à la liste
+            </a>
+        </div>
+
+        <form method="POST" class="space-y-6" enctype="multipart/form-data">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Nom du véhicule -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-300 mb-2">
+                        Nom du véhicule *
+                    </label>
+                    <input type="text" id="name" name="name" required value="{{ vehicle.name }}"
+                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white"
+                        placeholder="Ex: Toyota Camry 2021">
+                </div>
+
+                <!-- Type de véhicule -->
+                <div>
+                    <label for="type" class="block text-sm font-medium text-gray-300 mb-2">
+                        Type de véhicule *
+                    </label>
+                    <select id="type" name="type" required
+                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white">
+                        <option value="sedan" {% if vehicle.type=='sedan' %}selected{% endif %}>Berline</option>
+                        <option value="suv" {% if vehicle.type=='suv' %}selected{% endif %}>SUV</option>
+                        <option value="truck" {% if vehicle.type=='truck' %}selected{% endif %}>Camion</option>
+                        <option value="luxury" {% if vehicle.type=='luxury' %}selected{% endif %}>Luxe</option>
+                    </select>
+                </div>
+
+                <!-- Prix -->
+                <div>
+                    <label for="price" class="block text-sm font-medium text-gray-300 mb-2">
+                        Prix *
+                    </label>
+                    <input type="text" id="price" name="price" required value="{{ vehicle.price }}"
+                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white"
+                        placeholder="Ex: 25,900$">
+                </div>
+
+                <!-- Année -->
+                <div>
+                    <label for="year" class="block text-sm font-medium text-gray-300 mb-2">
+                        Année
+                    </label>
+                    <input type="number" id="year" name="year" min="1900" max="2030" value="{{ vehicle.year or '' }}"
+                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white"
+                        placeholder="Ex: 2021">
+                </div>
+
+                <!-- Kilométrage -->
+                <div>
+                    <label for="mileage" class="block text-sm font-medium text-gray-300 mb-2">
+                        Kilométrage
+                    </label>
+                    <input type="text" id="mileage" name="mileage" value="{{ vehicle.mileage or '' }}"
+                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white"
+                        placeholder="Ex: 45,000 km">
+                </div>
+
+                <!-- Type de carburant -->
+                <div>
+                    <label for="fuel_type" class="block text-sm font-medium text-gray-300 mb-2">
+                        Type de carburant
+                    </label>
+                    <select id="fuel_type" name="fuel_type"
+                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white">
+                        <option value="">Sélectionner</option>
+                        <option value="Essence" {% if vehicle.fuel_type=='Essence' %}selected{% endif %}>Essence
+                        </option>
+                        <option value="Diesel" {% if vehicle.fuel_type=='Diesel' %}selected{% endif %}>Diesel</option>
+                        <option value="Hybride" {% if vehicle.fuel_type=='Hybride' %}selected{% endif %}>Hybride
+                        </option>
+                        <option value="Électrique" {% if vehicle.fuel_type=='Électrique' %}selected{% endif %}>
+                            Électrique</option>
+                    </select>
+                </div>
+
+                <!-- Transmission -->
+                <div>
+                    <label for="transmission" class="block text-sm font-medium text-gray-300 mb-2">
+                        Transmission
+                    </label>
+                    <select id="transmission" name="transmission"
+                        class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white">
+                        <option value="">Sélectionner</option>
+                        <option value="Manuelle" {% if vehicle.transmission=='Manuelle' %}selected{% endif %}>Manuelle
+                        </option>
+                        <option value="Automatique" {% if vehicle.transmission=='Automatique' %}selected{% endif %}>
+                            Automatique</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Image actuelle -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">
+                    Image actuelle
+                </label>
+                {% if vehicle.image_url %}
+                <img src="{{ url_for('static', filename=vehicle.image_url) }}" alt="{{ vehicle.name }}"
+                    class="w-32 h-24 object-cover rounded-lg mb-2">
+                {% endif %}
+                <input type="file" id="image" name="image" accept="image/*"
+                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white">
+                <p class="text-sm text-gray-400 mt-1">
+                    Laissez vide pour conserver l'image actuelle. Formats acceptés : JPG, PNG, GIF
+                </p>
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-300 mb-2">
+                    Description
+                </label>
+                <textarea id="description" name="description" rows="4"
+                    class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent text-white"
+                    placeholder="Description détaillée du véhicule...">{{ vehicle.description or '' }}</textarea>
+            </div>
+
+            <!-- Disponibilité -->
+            <div>
+                <label class="flex items-center">
+                    <input type="checkbox" name="is_available" {% if vehicle.is_available %}checked{% endif %}
+                        class="rounded border-gray-600 text-red-600 focus:ring-red-600 bg-gray-700">
+                    <span class="ml-2 text-sm text-gray-300">Véhicule disponible</span>
+                </label>
+            </div>
+
+            <!-- Boutons -->
+            <div class="flex justify-end space-x-4">
+                <a href="{{ url_for('admin_vehicles') }}"
+                    class="px-6 py-3 border border-gray-600 text-gray-300 rounded-lg hover:bg-gray-700 transition duration-200">
+                    Annuler
+                </a>
+                <button type="submit"
+                    class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition duration-200">
+                    <i class="fas fa-save mr-2"></i>
+                    Sauvegarder les modifications
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

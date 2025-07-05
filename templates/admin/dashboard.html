@@ -1,0 +1,122 @@
+{% extends "admin/base.html" %}
+
+{% block title %}EF AUTO+ | Tableau de bord{% endblock %}
+{% block page_title %}Tableau de bord{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Statistiques -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div class="flex items-center">
+                <div class="p-3 bg-blue-500 rounded-full">
+                    <i class="fas fa-car text-white text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-gray-400 text-sm">Véhicules</p>
+                    <p class="text-2xl font-bold">{{ stats.vehicles }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div class="flex items-center">
+                <div class="p-3 bg-yellow-500 rounded-full">
+                    <i class="fas fa-exchange-alt text-white text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-gray-400 text-sm">Demandes d'échange</p>
+                    <p class="text-2xl font-bold">{{ stats.exchange_requests }}</p>
+                    <p class="text-sm text-yellow-400">{{ stats.pending_exchanges }} en attente</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div class="flex items-center">
+                <div class="p-3 bg-green-500 rounded-full">
+                    <i class="fas fa-envelope text-white text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-gray-400 text-sm">Messages</p>
+                    <p class="text-2xl font-bold">{{ stats.contact_messages }}</p>
+                    <p class="text-sm text-green-400">{{ stats.unread_messages }} non lus</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div class="flex items-center">
+                <div class="p-3 bg-red-500 rounded-full">
+                    <i class="fas fa-chart-line text-white text-xl"></i>
+                </div>
+                <div class="ml-4">
+                    <p class="text-gray-400 text-sm">Total</p>
+                    <p class="text-2xl font-bold">{{ stats.vehicles + stats.exchange_requests + stats.contact_messages
+                        }}</p>
+                    <p class="text-sm text-gray-400">Éléments</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions rapides -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold mb-4">Actions rapides</h3>
+            <div class="space-y-3">
+                <a href="{{ url_for('admin_add_vehicle') }}"
+                    class="flex items-center p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition duration-200">
+                    <i class="fas fa-plus mr-3 text-green-400"></i>
+                    <span>Ajouter un véhicule</span>
+                </a>
+                <a href="{{ url_for('admin_exchanges') }}"
+                    class="flex items-center p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition duration-200">
+                    <i class="fas fa-exchange-alt mr-3 text-yellow-400"></i>
+                    <span>Gérer les échanges</span>
+                </a>
+                <a href="{{ url_for('admin_contacts') }}"
+                    class="flex items-center p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition duration-200">
+                    <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                    <span>Voir les messages</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-bold mb-4">Liens utiles</h3>
+            <div class="space-y-3">
+                <a href="{{ url_for('home') }}" target="_blank"
+                    class="flex items-center p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition duration-200">
+                    <i class="fas fa-external-link-alt mr-3 text-red-400"></i>
+                    <span>Voir le site public</span>
+                </a>
+                <a href="{{ url_for('api_vehicles') }}" target="_blank"
+                    class="flex items-center p-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition duration-200">
+                    <i class="fas fa-code mr-3 text-purple-400"></i>
+                    <span>API Véhicules</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Informations système -->
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-bold mb-4">Informations système</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div>
+                <p class="text-gray-400">Utilisateur connecté</p>
+                <p class="font-semibold">{{ current_user.username }}</p>
+            </div>
+            <div>
+                <p class="text-gray-400">Email</p>
+                <p class="font-semibold">{{ current_user.email }}</p>
+            </div>
+            <div>
+                <p class="text-gray-400">Membre depuis</p>
+                <p class="font-semibold">{{ current_user.created_at.strftime('%d/%m/%Y') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -4,8 +4,8 @@
 
 ### 1. Balises Meta SEO
 ✅ **Title optimisé** avec mots-clés locaux
-✅ **Meta description** complète et attractive
-✅ **Meta keywords** ciblés pour la région de Québec
+✅ **Meta description** complète incluant "Eric Fonkou Auto"
+✅ **Meta keywords** ciblés pour la région de Québec + noms personnels
 ✅ **Balises géographiques** (geo.region, geo.position)
 ✅ **Balises Open Graph** pour partage sur réseaux sociaux
 ✅ **Twitter Cards** pour meilleur partage
@@ -13,6 +13,8 @@
 
 ### 2. Données Structurées (Schema.org)
 ✅ **Type: AutoDealer** - Pour les moteurs de recherche
+✅ **Noms alternatifs** : Eric Fonkou Auto, Eric Auto Plus, Eric Alain Auto
+✅ **Fondateur** : Eric Fonkou (information structurée)
 ✅ **Coordonnées complètes** avec adresse, téléphone, email
 ✅ **Heures d'ouverture** structurées
 ✅ **Géolocalisation** précise (latitude/longitude)
@@ -26,7 +28,10 @@
 ### 4. Mots-Clés Ciblés
 
 #### Mots-clés principaux :
-- EF AUTO+
+- EF AUTO+ / Eric Fonkou Auto
+- Eric Fonkou Auto Plus
+- Eric Auto / EF Auto Plus
+- Eric Alain Auto / Alain Auto
 - Concessionnaire automobile Québec
 - Achat voiture Québec
 - Vente auto Québec

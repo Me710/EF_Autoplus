@@ -135,25 +135,35 @@
 ## 📊 Mots-Clés à Suivre
 
 ### Priorité Haute :
-1. concessionnaire automobile québec
-2. achat voiture québec
-3. vente auto québec
+1. eric fonkou auto
+2. eric fonkou auto plus
+3. eric auto
 4. ef auto plus
-5. auto d'occasion québec
+5. concessionnaire automobile québec
+6. achat voiture québec
+7. vente auto québec
+8. auto d'occasion québec
 
 ### Priorité Moyenne :
-6. échange véhicule québec
-7. voiture neuve québec
-8. financement auto québec
-9. suv occasion québec
-10. concessionnaire ste-brigitte-de-laval
+9. alain auto
+10. eric alain auto
+11. échange véhicule québec
+12. voiture neuve québec
+13. financement auto québec
+14. suv occasion québec
+15. concessionnaire ste-brigitte-de-laval
 
 ### Longue Traîne :
-11. meilleur concessionnaire automobile québec
-12. acheter voiture d'occasion québec pas cher
-13. échange auto reprise québec
-14. garage automobile ste-brigitte-de-laval
-15. financement voiture sans mise de fond québec
+16. meilleur concessionnaire automobile québec
+17. acheter voiture d'occasion québec pas cher
+18. échange auto reprise québec
+19. garage automobile ste-brigitte-de-laval
+20. financement voiture sans mise de fond québec
+21. eric fonkou concessionnaire québec
+22. voiture occasion eric fonkou
+23. auto plus québec eric
+24. garage eric alain québec
+25. ef auto plus ste-brigitte-de-laval
 
 ## 💡 Conseils Importants
 

@@ -1,0 +1,57 @@
+# Instructions pour la Vérification Google Search Console
+
+## Méthode 1 : Balise HTML (Recommandé)
+
+1. Allez sur Google Search Console : https://search.google.com/search-console
+2. Ajoutez votre propriété (efautoplus.com)
+3. Choisissez "Balise HTML" comme méthode de vérification
+4. Copiez la balise meta fournie par Google (ressemble à) :
+   <meta name="google-site-verification" content="VOTRE_CODE_ICI" />
+
+5. Ajoutez cette balise dans templates/index.html, dans la section <head>, après les autres balises meta
+
+## Méthode 2 : Fichier HTML
+
+Si Google vous demande de créer un fichier HTML :
+
+1. Google vous donnera un fichier nommé : googleXXXXXXXXXXXXXXXX.html
+2. Créez ce fichier à la racine du projet avec le contenu fourni par Google
+3. Ajoutez cette route dans app.py :
+
+   @app.route('/googleXXXXXXXXXXXXXXXX.html')
+   def google_verification():
+       return send_from_directory(app.root_path, 'googleXXXXXXXXXXXXXXXX.html')
+
+4. Remplacez les X par votre code de vérification réel
+
+## Méthode 3 : Enregistrement DNS (Pour domaine personnalisé)
+
+Si vous avez accès à votre DNS :
+
+1. Ajoutez un enregistrement TXT à votre domaine
+2. Nom : @
+3. Valeur : google-site-verification=VOTRE_CODE_ICI
+
+## Après la vérification
+
+Une fois vérifié, n'oubliez pas de :
+- Soumettre votre sitemap.xml
+- Activer les rapports de performances
+- Vérifier l'indexation des pages
+- Corriger les éventuelles erreurs
+
+## Google My Business
+
+Pour créer votre fiche Google My Business :
+1. Allez sur https://business.google.com/
+2. Cliquez sur "Gérer maintenant"
+3. Entrez les informations :
+   - Nom : EF AUTO+
+   - Catégorie : Concessionnaire automobile
+   - Adresse : 11 Av Ste-Brigitte, Ste-Brigitte-de-Laval, QC G0A 3K0
+   - Téléphone : (514) 718-8041
+   - Site web : https://efautoplus.com
+4. Vérifiez votre entreprise (par courrier, téléphone ou email)
+5. Ajoutez des photos de qualité
+6. Demandez des avis à vos clients satisfaits
+

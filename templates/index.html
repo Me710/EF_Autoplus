@@ -4,7 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EF AUTO+ | Achat · Vente · Échange de véhicules à Québec</title>
+    <title>EF AUTO+ | Achat · Vente · Échange de véhicules à Québec | Concessionnaire Ste-Brigitte-de-Laval</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="EF AUTO+ (Eric Fonkou Auto) : Votre concessionnaire automobile de confiance à Ste-Brigitte-de-Laval, Québec. Achat, vente et échange de véhicules neufs et d'occasion. Berlines, SUV, camions et véhicules de luxe. Service personnalisé et financement disponible.">
+    <meta name="keywords" content="EF AUTO+, Eric Fonkou Auto, eric fonkou auto plus, eric auto, ef auto plus, alain auto, eric alain auto, concessionnaire automobile Québec, achat voiture Québec, vente auto Québec, échange véhicule Québec, auto d'occasion Québec, voiture neuve Québec, SUV Québec, camion Québec, financement auto Québec, Ste-Brigitte-de-Laval, Château-Richer, Beaupré, Côte-de-Beaupré, Charlevoix, Montmorency, concessionnaire auto, garage automobile, voiture occasion, auto usagée, véhicule d'occasion, berline, luxe, dealer auto, meilleur prix auto, achat auto pas cher, échange de véhicule, estimation gratuite, service automobile">
+    <meta name="author" content="EF AUTO+">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="fr-CA">
+    <meta name="geo.region" content="CA-QC">
+    <meta name="geo.placename" content="Ste-Brigitte-de-Laval, Québec">
+    <meta name="geo.position" content="46.912614;-71.179264">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://efautoplus.com/">
+    <meta property="og:title" content="EF AUTO+ (Eric Fonkou Auto) | Concessionnaire automobile à Québec | Achat · Vente · Échange">
+    <meta property="og:description" content="Eric Fonkou - Votre expert automobile à Ste-Brigitte-de-Laval. Large sélection de véhicules neufs et d'occasion. Service personnalisé, financement disponible.">
+    <meta property="og:image" content="{{ url_for('static', filename='images/ef_autoplus_logo.jpg', _external=True) }}">
+    <meta property="og:locale" content="fr_CA">
+    <meta property="og:site_name" content="EF AUTO+">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EF AUTO+ (Eric Fonkou Auto) | Concessionnaire automobile à Québec">
+    <meta name="twitter:description" content="Eric Fonkou - Achat, vente et échange de véhicules à Ste-Brigitte-de-Laval, Québec">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/ef_autoplus_logo.jpg', _external=True) }}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://efautoplus.com/">
+    
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoDealer",
+      "name": "EF AUTO+",
+      "image": "{{ url_for('static', filename='images/ef_autoplus_logo.jpg', _external=True) }}",
+      "logo": "{{ url_for('static', filename='images/ef_autoplus_logo.jpg', _external=True) }}",
+      "@id": "https://efautoplus.com/",
+      "url": "https://efautoplus.com/",
+      "telephone": "(514) 718-8041",
+      "email": "efautoplus1@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "11 Av Ste-Brigitte",
+        "addressLocality": "Ste-Brigitte-de-Laval",
+        "addressRegion": "QC",
+        "postalCode": "G0A 3K0",
+        "addressCountry": "CA"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 46.912614,
+        "longitude": -71.179264
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "priceRange": "$$",
+      "description": "Concessionnaire automobile spécialisé dans l'achat, la vente et l'échange de véhicules neufs et d'occasion à Québec",
+      "areaServed": ["Québec", "Ste-Brigitte-de-Laval", "Château-Richer", "Beaupré", "Côte-de-Beaupré", "Charlevoix", "Montmorency"],
+      "paymentAccepted": ["Cash", "Credit Card", "Financing"],
+      "currenciesAccepted": "CAD"
+    }
+    </script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -425,7 +501,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold">Adresse</h4>
-                            <p class="text-gray-400">1234 Rue de l'Auto, Québec, QC G1V 2L9</p>
+                            <p class="text-gray-400">11 Av Ste-Brigitte<br>Ste-Brigitte-de-Laval, QC G0A 3K0<br>Canada</p>
                         </div>
                     </div>
                     <div class="flex items-start">
@@ -434,7 +510,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold">Téléphone</h4>
-                            <p class="text-gray-400">(418) 555-1234</p>
+                            <p class="text-gray-400">(514) 718-8041</p>
                         </div>
                     </div>
                     <div class="flex items-start">
@@ -443,7 +519,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold">Email</h4>
-                            <p class="text-gray-400">contact@efautoplus.com</p>
+                            <p class="text-gray-400">efautoplus1@gmail.com</p>
                         </div>
                     </div>
                     <div class="flex items-start">
@@ -455,7 +531,7 @@
                             <p class="text-gray-400">
                                 Lundi-Vendredi: 9h00-18h00<br>
                                 Samedi: 9h00-17h00<br>
-                                Dimanche: Fermé
+                                Dimanche: Sur Rendez-vous !
                             </p>
                         </div>
                     </div>
@@ -524,7 +600,7 @@
         <!-- Map -->
         <div class="mt-16 rounded-lg overflow-hidden">
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2726.6672545904235!2d-71.27336668444512!3d46.80255587913997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb9ab8b5d8f9b0f%3A0x6a3a6e7b31520b84!2sQu%C3%A9bec%20City%2C%20QC!5e0!3m2!1sen!2sca!4v1623932090152!5m2!1sen!2sca"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2719.8!2d-71.179264!3d46.912614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cb8a7f8f8f8f8f8%3A0x0!2s11%20Av%20Ste-Brigitte%2C%20Ste-Brigitte-de-Laval%2C%20QC%20G0A%203K0!5e0!3m2!1sfr!2sca!4v1623932090152!5m2!1sfr!2sca"
                 width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                 class="rounded-lg"></iframe>
         </div>

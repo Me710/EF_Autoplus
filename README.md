@@ -35,6 +35,15 @@ Application web moderne pour la gestion d'un concessionnaire automobile avec bac
 - **Statuts automatiques** mis à jour lors des réponses
 - **Interface dédiée** pour chaque type de réponse
 
+### Optimisation SEO 🚀
+- **Balises meta complètes** avec mots-clés ciblés pour Québec
+- **Données structurées Schema.org** pour AutoDealer
+- **Open Graph et Twitter Cards** pour partage sur réseaux sociaux
+- **Géolocalisation précise** pour recherches locales
+- **Fichiers robots.txt et sitemap.xml** pour meilleure indexation
+- **Mots-clés optimisés** pour la région de Québec et environs
+- **Guide SEO complet** (voir SEO_GUIDE.md)
+
 ## 🛠️ Technologies Utilisées
 
 - **Backend**: Flask (Python)
@@ -243,11 +252,26 @@ CMD ["python", "app.py"]
    - Vérifiez que l'utilisateur admin a été créé
    - Consultez les logs de l'application
 
+## 🔍 Optimisation SEO
+
+Consultez le fichier **SEO_GUIDE.md** pour :
+- Les optimisations déjà implémentées
+- Les prochaines étapes pour améliorer le référencement
+- Les outils et métriques à suivre
+- Un plan d'action détaillé
+
+### Informations de Contact
+- **Adresse** : 11 Av Ste-Brigitte, Ste-Brigitte-de-Laval, QC G0A 3K0, Canada
+- **Téléphone** : (514) 718-8041
+- **Email** : efautoplus1@gmail.com
+- **Heures** : Lun-Ven 9h-18h | Sam 9h-17h | Dim sur rendez-vous
+
 ## 📞 Support
 
 Pour toute question ou problème :
 - Vérifiez les logs de l'application
 - Consultez la documentation Flask
+- Consultez le guide SEO (SEO_GUIDE.md)
 - Ouvrez une issue sur le repository
 
 ## 📄 Licence

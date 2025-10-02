@@ -1,0 +1,22 @@
+# robots.txt pour EF AUTO+
+# Permet aux moteurs de recherche d'indexer le site
+
+User-agent: *
+Allow: /
+Allow: /vehicule/
+Disallow: /admin/
+Disallow: /admin/*
+
+# Sitemap
+Sitemap: https://efautoplus.com/sitemap.xml
+
+# Bots spécifiques
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
